@@ -33,15 +33,15 @@ public class MapController {
         this.mapService = mapService;
     }	
     
-    @RequestMapping(value = "/user", method = RequestMethod.POST)
+    @RequestMapping(value = "/place", method = RequestMethod.POST)
     public Place createPlace(@RequestBody @Valid final Place place) {
         LOGGER.debug("Received request to create the {}", place);
         return mapService.save(place);
     }
 
-    @RequestMapping(value = "/user", method = RequestMethod.GET)
+    @RequestMapping(value = "/places", method = RequestMethod.GET)
     public List<Place> listUsers() {
-        LOGGER.debug("Received request to list all users");
+        LOGGER.debug("Received request to list all places");
         return mapService.getList();
     }
 }
