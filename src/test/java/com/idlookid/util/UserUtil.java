@@ -12,7 +12,7 @@ import com.idlookid.domain.User;
 
 public class UserUtil {
 
-    private static final String ID = "id";
+    private static final Long ID = Long.valueOf(100);
     private static final String PASSWORD = "password";
 
     private UserUtil() {
@@ -25,7 +25,7 @@ public class UserUtil {
     public static List<User> createUserList(int howMany) {
         List<User> userList = new ArrayList<>();
         for (int i = 0; i < howMany; i++) {
-            userList.add(new User(ID + "#" + i, PASSWORD));
+            userList.add(new User(ID + i, PASSWORD));
         }
         return userList;
     }

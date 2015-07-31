@@ -34,7 +34,7 @@ public class Place {
 
     @NotNull
     @Size(max = 200)
-    @Column(name = "title", nullable = true)
+    @Column(name = "information", nullable = true)
     private String information;
     
     @NotNull

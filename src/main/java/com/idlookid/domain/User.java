@@ -18,9 +18,8 @@ public class User {
 
     @Id
     @NotNull
-    @Size(max = 64)
     @Column(name = "id", nullable = false, updatable = false)
-    private String id;
+    private Long id;
 
     @NotNull
     @Size(max = 64)
@@ -30,12 +29,12 @@ public class User {
     User() {
     }
 
-    public User(final String id, final String password) {
+    public User(final Long id, final String password) {
         this.id = id;
         this.password = password;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
