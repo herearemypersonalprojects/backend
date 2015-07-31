@@ -1,4 +1,9 @@
-package eu.kielczewski.example.service.exception;
+package com.idlookid.service.exception;
+
+/**
+ * @author quocanh
+ *
+ */
 
 public class UserAlreadyExistsException extends RuntimeException {
 

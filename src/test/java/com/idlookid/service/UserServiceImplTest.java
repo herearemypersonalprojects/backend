@@ -1,20 +1,28 @@
-package eu.kielczewski.example.service;
+package com.idlookid.service;
 
-import eu.kielczewski.example.domain.User;
-import eu.kielczewski.example.repository.UserRepository;
-import eu.kielczewski.example.service.exception.UserAlreadyExistsException;
-import eu.kielczewski.example.util.UserUtil;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import com.idlookid.domain.User;
+import com.idlookid.repository.UserRepository;
+import com.idlookid.service.UserService;
+import com.idlookid.service.UserServiceImpl;
+import com.idlookid.service.exception.UserAlreadyExistsException;
+import com.idlookid.util.UserUtil;
+
 import java.util.Collection;
 
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
+
+/**
+ * @author quocanh
+ *
+ */
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserServiceImplTest {

@@ -1,8 +1,13 @@
-package eu.kielczewski.example.service;
-
-import eu.kielczewski.example.domain.User;
+package com.idlookid.service;
 
 import java.util.List;
+
+import com.idlookid.domain.User;
+
+/**
+ * @author quocanh
+ *
+ */
 
 public interface UserService {
 

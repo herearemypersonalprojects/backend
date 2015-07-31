@@ -1,7 +1,13 @@
-package eu.kielczewski.example.repository;
+package com.idlookid.repository;
 
-import eu.kielczewski.example.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.idlookid.domain.User;
+
+/**
+ * @author quocanh
+ *
+ */
 
 public interface UserRepository extends JpaRepository<User, String> {
 }

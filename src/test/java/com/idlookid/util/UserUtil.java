@@ -1,9 +1,14 @@
-package eu.kielczewski.example.util;
-
-import eu.kielczewski.example.domain.User;
+package com.idlookid.util;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.idlookid.domain.User;
+
+/**
+ * @author quocanh
+ *
+ */
 
 public class UserUtil {
 

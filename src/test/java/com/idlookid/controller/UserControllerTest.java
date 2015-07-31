@@ -1,19 +1,26 @@
-package eu.kielczewski.example.controller;
+package com.idlookid.controller;
 
-import eu.kielczewski.example.domain.User;
-import eu.kielczewski.example.service.UserService;
-import eu.kielczewski.example.util.UserUtil;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import com.idlookid.controller.UserController;
+import com.idlookid.domain.User;
+import com.idlookid.service.UserService;
+import com.idlookid.util.UserUtil;
+
 import java.util.Collection;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.*;
+
+/**
+ * @author quocanh
+ *
+ */
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserControllerTest {

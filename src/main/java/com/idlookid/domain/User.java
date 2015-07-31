@@ -1,4 +1,4 @@
-package eu.kielczewski.example.domain;
+package com.idlookid.domain;
 
 import com.google.common.base.Objects;
 
@@ -7,6 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+/**
+ * @author quocanh
+ *
+ */
 
 @Entity
 public class User {

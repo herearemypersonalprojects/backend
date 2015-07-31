@@ -1,18 +1,25 @@
-package eu.kielczewski.example.service;
+package com.idlookid.service;
 
-import eu.kielczewski.example.domain.User;
-import eu.kielczewski.example.repository.UserRepository;
-import eu.kielczewski.example.service.exception.UserAlreadyExistsException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
+import com.idlookid.domain.User;
+import com.idlookid.repository.UserRepository;
+import com.idlookid.service.exception.UserAlreadyExistsException;
+
 import javax.inject.Inject;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+
 import java.util.List;
+
+/**
+ * @author quocanh
+ *
+ */
 
 @Service
 @Validated
