@@ -1,7 +1,13 @@
 package com.idlookid.service;
 
+import java.util.List;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
@@ -9,12 +15,6 @@ import org.springframework.validation.annotation.Validated;
 import com.idlookid.domain.User;
 import com.idlookid.repository.UserRepository;
 import com.idlookid.service.exception.UserAlreadyExistsException;
-
-import javax.inject.Inject;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-
-import java.util.List;
 
 /**
  * @author quocanh
@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService {
     private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
     private final UserRepository repository;
 
-    @Inject
+    @Autowired
     public UserServiceImpl(final UserRepository repository) {
         this.repository = repository;
     }

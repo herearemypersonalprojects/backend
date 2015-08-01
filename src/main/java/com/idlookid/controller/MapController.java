@@ -5,18 +5,17 @@ package com.idlookid.controller;
 
 import java.util.List;
 
-import javax.inject.Inject;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.idlookid.domain.Place;
-import com.idlookid.domain.User;
 import com.idlookid.service.MapService;
 
 /**
@@ -28,7 +27,7 @@ public class MapController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(MapController.class);
     private final MapService mapService;
 
-    @Inject
+    @Autowired
     public MapController(final MapService mapService) {
         this.mapService = mapService;
     }	

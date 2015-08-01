@@ -1,18 +1,23 @@
 package com.idlookid.controller;
 
+import java.util.List;
+
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.idlookid.domain.User;
 import com.idlookid.service.UserService;
 import com.idlookid.service.exception.UserAlreadyExistsException;
-
-import javax.inject.Inject;
-import javax.validation.Valid;
-
-import java.util.List;
 
 /**
  * @author quocanh
@@ -25,7 +30,7 @@ public class UserController {
     private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
     private final UserService userService;
 
-    @Inject
+    @Autowired
     public UserController(final UserService userService) {
         this.userService = userService;
     }
