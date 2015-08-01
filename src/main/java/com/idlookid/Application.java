@@ -18,7 +18,7 @@ import com.idlookid.config.ApplicationSecurity;
 
 @Configuration
 @EnableAutoConfiguration
-@ComponentScan
+@ComponentScan("com.idlookid")
 public class Application extends SpringBootServletInitializer {
 
     public static void main(final String[] args) {

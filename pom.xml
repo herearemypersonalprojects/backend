@@ -11,7 +11,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.2.0.RELEASE</version>
+		<version>1.2.5.RELEASE</version>
 	</parent>
 
 	<name>Gembro Project</name>
@@ -19,7 +19,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<start-class>net.tubizou.gembro.Application</start-class>
+		<start-class>com.idlookid.Application</start-class>
 		<java.version>1.8</java.version>
 		<log4j.version>1.2.17</log4j.version>
 		<javax.mail.version>1.5.3</javax.mail.version>
