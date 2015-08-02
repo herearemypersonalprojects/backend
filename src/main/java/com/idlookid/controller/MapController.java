@@ -3,6 +3,7 @@
  */
 package com.idlookid.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -42,5 +43,12 @@ public class MapController {
     public List<Place> listUsers() {
         LOGGER.debug("Received request to list all places");
         return mapService.getList();
+    }
+    
+    @RequestMapping(value = "/cities", method = RequestMethod.GET)
+    public List<String> listCities(@RequestBody final String country) {
+    	List<String> lstCities = new ArrayList<String>();
+    	lst
+		return lstCities;
     }
 }
