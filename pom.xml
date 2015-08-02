@@ -3,10 +3,9 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>info.lequocanh</groupId>
-	<artifactId>gembro</artifactId>
+	<groupId>idlookid</groupId>
+	<artifactId>backend</artifactId>
 	<version>1.0-SNAPSHOT</version>
-	<packaging>jar</packaging>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -14,8 +13,8 @@
 		<version>1.2.5.RELEASE</version>
 	</parent>
 
-	<name>Gembro Project</name>
-	<url>http://lequocanh.info/gembro</url>
+	<name>Location based community services</name>
+	<url>http://www.idlookid.com</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -111,6 +110,12 @@
 			<version>18.0</version>
 		</dependency>
 
+		<!--DEPLOYING WITH SERVER's TOMCAT -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
