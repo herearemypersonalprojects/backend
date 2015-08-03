@@ -6,8 +6,6 @@ package com.idlookid.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,15 +30,9 @@ public class MapController {
     public MapController(final MapService mapService) {
         this.mapService = mapService;
     }	
-    
-    @RequestMapping(value = "/place", method = RequestMethod.POST)
-    public Place createPlace(@RequestBody @Valid final Place place) {
-        LOGGER.debug("Received request to create the {}", place);
-        return mapService.save(place);
-    }
 
     @RequestMapping(value = "/places", method = RequestMethod.GET)
-    public List<Place> listUsers() {
+    public List<Place> listPlaces() {
         LOGGER.debug("Received request to list all places");
         return mapService.getList();
     }
@@ -48,7 +40,7 @@ public class MapController {
     @RequestMapping(value = "/cities", method = RequestMethod.GET)
     public List<String> listCities(@RequestBody final String country) {
     	List<String> lstCities = new ArrayList<String>();
-    	lst
+    	
 		return lstCities;
     }
 }

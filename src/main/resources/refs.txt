@@ -1,0 +1,2 @@
+http://ryanjbaxter.com/2014/12/17/building-rest-apis-with-spring-boot/
+TEST: $ curl -i -X POST -H "Content-Type:application/json" -d '{  "firstName" : "Frodo",  "lastName" : "Baggins" }' http://localhost:8080/people
