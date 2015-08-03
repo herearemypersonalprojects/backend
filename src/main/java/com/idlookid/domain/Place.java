@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -21,112 +23,108 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "place")
 public class Place {
-    @Id
-    @NotNull
-    @Column(name = "id", nullable = false, updatable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    
-    @NotNull
-    @Size(max = 64)
-    @Column(name = "title", nullable = false)
-    private String title;
+	@Id
+	@Column(name = "id", nullable = false, updatable = false)
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 
-    @NotNull
-    @Size(max = 200)
-    @Column(name = "information", nullable = true)
-    private String information;
-    
-    @NotNull
-    @Size(max = 64)
-    @Column(name = "icon_path", nullable = true)
-    private String iconPath;
-    
-    @NotNull
-    @Size(max = 64)
-    @Column(name = "image_path", nullable = true)
-    private String imagePath;
-    
-    @NotNull
-    @Size(max = 64)
-    @Column(name = "country", nullable = false)
-    private String country;
-    
-    @NotNull
-    @Size(max = 64)
-    @Column(name = "city", nullable = true)
-    private String city;
+	@NotNull
+	@Size(max = 64)
+	@Column(name = "title", nullable = false)
+	private String title;
 
-    @NotNull
-    @Size(max = 100)
-    @Column(name = "address", nullable = true)
-    private String address;
-    
-    @NotNull
-    @Column(name = "latitude")
-    Double latitude;
+	@Size(max = 200)
+	@Column(name = "information", nullable = true)
+	private String information;
 
-    @NotNull
-    @Column(name = "longitude")
-    Double longitude;
-    
-    @NotNull
-    @Size(max = 64)    
-    @Column(name = "community_code", nullable = false)
-    String communityCode;
-    
-    @NotNull
-    @Size(max = 64)    
-    @Column(name = "place_type", nullable = false)
-    String placeType;
-    
-    @NotNull
-    @Size(max = 64)    
-    @Column(name = "reference_url", nullable = true)
-    String referenceUrl;
+	@Size(max = 64)
+	@Column(name = "icon_path", nullable = true)
+	private String iconPath;
 
-    @NotNull
-    @Size(max = 64)    
-    @Column(name = "idlookid_url", nullable = true)
-    String idLookitUrl;
-    
-    @Column(name = "created_by_user_id")
-    long createdByUserId;    
-    
-    @NotNull
-    @Column(name = "created_date")
-    Date createdDate;
-    
-    @Column(name = "updated_date")
-    Date updatedDate;
-    
-    @NotNull
-    @Column(name = "created_from_ip")
-    String createdFromIp;
-    
-    @Column(name = "email")
-    String email;
-    
-    @Column(name = "telephone")
-    String telephone;
-    
-    @Column(name = "openTime")
-    String openTime;
-    
-    @Column(name = "closeTime")
-    String closeTime;
-    
-    @Column(name = "organised_by")
-    String organisedBy;
+	@Size(max = 64)
+	@Column(name = "image_path", nullable = true)
+	private String imagePath;
 
-    /* PUBLIC METHODS */
-    
-	public long getId() {
+	@NotNull
+	@Size(max = 64)
+	@Column(name = "country", nullable = false)
+	private String country;
+
+	@Size(max = 64)
+	@Column(name = "city", nullable = true)
+	private String city;
+
+	@Size(max = 100)
+	@Column(name = "address", nullable = true)
+	private String address;
+
+	@NotNull
+	@Column(name = "latitude")
+	Double latitude;
+
+	@NotNull
+	@Column(name = "longitude")
+	Double longitude;
+
+	@NotNull
+	@Size(max = 64)
+	@Column(name = "community_code", nullable = false)
+	String communityCode;
+
+	@NotNull
+	@Size(max = 64)
+	@Column(name = "place_type", nullable = false)
+	String placeType;
+
+	@Size(max = 64)
+	@Column(name = "reference_url", nullable = true)
+	String referenceUrl;
+
+	@Size(max = 64)
+	@Column(name = "idlookid_url", nullable = true)
+	String idLookitUrl;
+
+	@Column(name = "created_by_user_id")
+	long createdByUserId;
+
+	@Column(name = "created_date")
+	Date createdDate;
+
+	@Column(name = "updated_date")
+	Date updatedDate;
+
+	@Column(name = "created_from_ip")
+	String createdFromIp;
+
+	@Column(name = "email")
+	String email;
+
+	@Column(name = "telephone")
+	String telephone;
+
+	@Column(name = "openTime")
+	String openTime;
+
+	@Column(name = "closeTime")
+	String closeTime;
+
+	@Column(name = "organised_by")
+	String organisedBy;
+
+	/* PUBLIC METHODS */
+
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	@PrePersist
+	protected void onCreate() {
+		createdDate = new Date();
+	}
+
+	@PreUpdate
+	protected void onUpdate() {
+		updatedDate = new Date();
 	}
 
 	public String getTitle() {
@@ -304,7 +302,5 @@ public class Place {
 	public void setOrganisedBy(String organisedBy) {
 		this.organisedBy = organisedBy;
 	}
-    
 
-    
 }

@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
 import com.idlookid.domain.Place;
@@ -28,22 +29,27 @@ public class MapServiceImpl implements MapService {
     public MapServiceImpl(final MapRepository repository) {
         this.repository = repository;
     }
-	/* (non-Javadoc)
-	 * @see com.idlookid.service.MapService#save(com.idlookid.domain.Place)
-	 */
-	@Override
-	public Place save(Place place) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	/* (non-Javadoc)
 	 * @see com.idlookid.service.MapService#getList()
 	 */
 	@Override
+	@Transactional(readOnly = true)
 	public List<Place> getList() {
-		// TODO Auto-generated method stub
-		return null;
+        LOGGER.debug("Retrieving the list of all places");
+        return repository.findAll();
 	}
 
+	@Override
+	@Transactional(readOnly = true) 
+	public List<String> getListCities() {
+		return repository.findAllCities();
+	}
+
+	@Override
+	@Transactional(readOnly = true) 
+	public List<String> getListPlaceTypes() {
+		return repository.getListPlaceTypes();
+	}	
+	
 }

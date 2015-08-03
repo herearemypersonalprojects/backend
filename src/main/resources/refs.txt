@@ -1,0 +1,4 @@
+http://ryanjbaxter.com/2014/12/17/building-rest-apis-with-spring-boot/
+TEST: 
+$ curl -i -X POST -H "Content-Type:application/json" -d '{  "firstName" : "Frodo",  "lastName" : "Baggins" }' http://localhost:8080/people
+curl -i -X POST -H "Content-Type:application/json" -d '{"title":"Pho 14", "information":"Quan pho", "country":"France", "city":"Paris","address":"20 avenue de choisy","latitude": 103, "longitude":323,"communityCode":"vietnam","placeType":"restaurant","password":"pwd7"}' http://localhost:2011/place

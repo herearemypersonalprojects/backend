@@ -19,9 +19,8 @@ import javax.validation.constraints.Size;
 public class User {
 
     @Id
-    @NotNull
     @Column(name = "id", nullable = false, updatable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @NotNull
@@ -49,7 +48,8 @@ public class User {
         this.password = password;
     }
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public String toString() {
         return Objects.toStringHelper(this)
                 .add("id", id)

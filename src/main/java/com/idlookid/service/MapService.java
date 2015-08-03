@@ -12,7 +12,7 @@ import com.idlookid.domain.Place;
  *
  */
 public interface MapService {
-    Place save(Place place);
-
+	List<String> getListCities();
+	List<String> getListPlaceTypes();
     List<Place> getList();
 }
