@@ -37,12 +37,10 @@ public class Place {
 	@Column(name = "information", nullable = true)
 	private String information;
 
-	@NotNull
 	@Size(max = 64)
 	@Column(name = "icon_path", nullable = true)
 	private String iconPath;
 
-	@NotNull
 	@Size(max = 64)
 	@Column(name = "image_path", nullable = true)
 	private String imagePath;
