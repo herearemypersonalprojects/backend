@@ -5,9 +5,6 @@ package com.idlookid.service;
 
 import java.util.List;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,15 +29,6 @@ public class MapServiceImpl implements MapService {
     public MapServiceImpl(final MapRepository repository) {
         this.repository = repository;
     }
-	/* (non-Javadoc)
-	 * @see com.idlookid.service.MapService#save(com.idlookid.domain.Place)
-	 */
-	@Override
-	@Transactional
-	public Place save(@NotNull @Valid final Place place) {
-        LOGGER.debug("Creating {}", place);        
-        return repository.save(place);
-	}
 
 	/* (non-Javadoc)
 	 * @see com.idlookid.service.MapService#getList()
@@ -52,4 +40,16 @@ public class MapServiceImpl implements MapService {
         return repository.findAll();
 	}
 
+	@Override
+	@Transactional(readOnly = true) 
+	public List<String> getListCities() {
+		return repository.findAllCities();
+	}
+
+	@Override
+	@Transactional(readOnly = true) 
+	public List<String> getListPlaceTypes() {
+		return repository.getListPlaceTypes();
+	}	
+	
 }
