@@ -56,6 +56,7 @@ public class PlaceController {
     
     @RequestMapping(method = RequestMethod.DELETE, value = "{id}")
     public void delete(@PathVariable Long id) {
-    	placeService.delete(id);
+    	LOGGER.debug("Someone try to delete the {}", placeService.get(id));
+    	//placeService.delete(id);
     }
 }
