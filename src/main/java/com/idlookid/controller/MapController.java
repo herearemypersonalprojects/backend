@@ -5,6 +5,8 @@ package com.idlookid.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,4 +47,8 @@ public class MapController {
 		return mapService.getListPlaceTypes();
     }
     
+    @RequestMapping(value = "/getIp", method = RequestMethod.GET)
+    public String getUserIp(HttpServletRequest request) {
+    	return request.getRemoteAddr();
+    }
 }

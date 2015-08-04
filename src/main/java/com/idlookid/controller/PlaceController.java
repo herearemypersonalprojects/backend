@@ -3,6 +3,7 @@
  */
 package com.idlookid.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -40,8 +41,10 @@ public class PlaceController {
     }
     
     @RequestMapping(method = RequestMethod.POST)
-    public Place create(@ModelAttribute @Valid final Place place) {
-        LOGGER.debug("Received request to create the {}", place);
+    public Place create(@ModelAttribute @Valid final Place place, HttpServletRequest request) {
+    	place.setCreatedFromIp(request.getRemoteAddr());
+        
+    	LOGGER.debug("Received request to create the {}", place);
         return placeService.create(place);
     }    
     
