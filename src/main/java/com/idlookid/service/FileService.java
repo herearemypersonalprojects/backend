@@ -60,7 +60,7 @@ public class FileService {
                         new BufferedOutputStream(new FileOutputStream(new File(name)));
                 stream.write(bytes);
                 stream.close();
-                return name;
+                return name.substring(name.indexOf("/images/"));
             } catch (Exception e) {
                 return "";
             }
