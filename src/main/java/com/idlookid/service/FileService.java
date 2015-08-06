@@ -49,9 +49,10 @@ public class FileService {
 	 * @return
 	 */
 	public String saveFile(MultipartFile file, Long id, String prefix) {
+		String homeDir = System.getProperty("user.home");
 		if (file != null && !file.isEmpty()) {			
             try {
-            	String path = "/home/quocanh/apps/frontend/images/" + prefix + String.valueOf(id.longValue()) + "/";
+            	String path = homeDir + "/apps/frontend/images/" + prefix + String.valueOf(id.longValue()) + "/";
             	prepareFolder(path);
                 byte[] bytes = file.getBytes();
                 String name = path + getFileName(id, file.getOriginalFilename());
