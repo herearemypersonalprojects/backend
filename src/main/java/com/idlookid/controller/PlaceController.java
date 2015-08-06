@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.idlookid.domain.Place;
 import com.idlookid.service.FileService;
 import com.idlookid.service.PlaceService;
+import com.idlookid.staticdata.ObjectType;
 
 /**
  * @author quocanh
@@ -51,7 +52,7 @@ public class PlaceController {
         
     	LOGGER.debug("Received request to create the {}", place);
     	Place createdPlace = placeService.create(place);
-    	String imagePath = fileService.saveFile(file, createdPlace.getId());
+    	String imagePath = fileService.saveFile(file, createdPlace.getId(), ObjectType.PLACE.getLabel());
     	place.setImagePath(imagePath);
         return placeService.update(createdPlace.getId(), createdPlace);
     }    

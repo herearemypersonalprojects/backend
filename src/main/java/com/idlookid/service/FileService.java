@@ -48,10 +48,10 @@ public class FileService {
 	 * @param id
 	 * @return
 	 */
-	public String saveFile(MultipartFile file, Long id) {
+	public String saveFile(MultipartFile file, Long id, String prefix) {
 		if (file != null && !file.isEmpty()) {			
             try {
-            	String path = "/home/quocanh/apps/frontend/images/" + String.valueOf(id.longValue()) + "/";
+            	String path = "/home/quocanh/apps/frontend/images/" + prefix + String.valueOf(id.longValue()) + "/";
             	prepareFolder(path);
                 byte[] bytes = file.getBytes();
                 String name = path + getFileName(id, file.getOriginalFilename());
