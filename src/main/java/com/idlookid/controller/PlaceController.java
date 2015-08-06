@@ -14,9 +14,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.idlookid.domain.Place;
+import com.idlookid.service.FileService;
 import com.idlookid.service.PlaceService;
 
 /**
@@ -28,10 +31,12 @@ import com.idlookid.service.PlaceService;
 public class PlaceController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(PlaceController.class);
     private final PlaceService placeService;
-
+    private final FileService fileService;
+    
     @Autowired
-    public PlaceController(final PlaceService placeService) {
+    public PlaceController(final PlaceService placeService, final FileService fileService) {
         this.placeService = placeService;
+        this.fileService = fileService;
     }
     
     @RequestMapping(method = RequestMethod.GET, value = "{id}")
@@ -41,11 +46,14 @@ public class PlaceController {
     }
     
     @RequestMapping(method = RequestMethod.POST)
-    public Place create(@ModelAttribute @Valid final Place place, HttpServletRequest request) {
+    public Place create(@ModelAttribute @Valid final Place place, @RequestParam("file") MultipartFile file, HttpServletRequest request) {
     	place.setCreatedFromIp(request.getRemoteAddr());
         
     	LOGGER.debug("Received request to create the {}", place);
-        return placeService.create(place);
+    	Place createdPlace = placeService.create(place);
+    	String imagePath = fileService.saveFile(file, createdPlace.getId());
+    	place.setImagePath(imagePath);
+        return placeService.update(createdPlace.getId(), createdPlace);
     }    
     
     @RequestMapping(method = RequestMethod.PUT, value = "{id}")

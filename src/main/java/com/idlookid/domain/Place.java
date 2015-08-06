@@ -29,28 +29,22 @@ public class Place {
 	private Long id;
 
 	@NotNull
-	@Size(max = 64)
 	@Column(name = "title", nullable = false)
 	private String title;
 
-	@Size(max = 200)
 	@Column(name = "information", nullable = true)
 	private String information;
 
-	@Size(max = 64)
 	@Column(name = "icon_path", nullable = true)
 	private String iconPath;
 
-	@Size(max = 64)
 	@Column(name = "image_path", nullable = true)
 	private String imagePath;
 
 	@NotNull
-	@Size(max = 64)
 	@Column(name = "country", nullable = false)
 	private String country;
 
-	@Size(max = 64)
 	@Column(name = "city", nullable = true)
 	private String city;
 
@@ -76,20 +70,16 @@ public class Place {
 	Double longitude;
 
 	@NotNull
-	@Size(max = 64)
 	@Column(name = "community_code", nullable = false)
 	String communityCode;
 
 	@NotNull
-	@Size(max = 64)
 	@Column(name = "place_type", nullable = false)
 	String placeType;
 
-	@Size(max = 64)
 	@Column(name = "reference_url", nullable = true)
 	String referenceUrl;
 
-	@Size(max = 64)
 	@Column(name = "idlookid_url", nullable = true)
 	String idLookitUrl;
 

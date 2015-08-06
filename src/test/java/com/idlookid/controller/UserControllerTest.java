@@ -8,6 +8,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import com.idlookid.controller.UserController;
 import com.idlookid.domain.User;
+import com.idlookid.service.FileService;
 import com.idlookid.service.UserService;
 import com.idlookid.util.UserUtil;
 
@@ -25,21 +26,21 @@ import static org.mockito.Mockito.*;
 @RunWith(MockitoJUnitRunner.class)
 public class UserControllerTest {
 
-    @Mock
-    private UserService userService;
+    @Mock private UserService userService;
+    @Mock private FileService fileService;
 
     private UserController userController;
 
     @Before
     public void setUp() throws Exception {
-        userController = new UserController(userService);
+        userController = new UserController(userService, fileService);
     }
 
     @Test
     public void shouldCreateUser() throws Exception {
         final User savedUser = stubServiceToReturnStoredUser();
         final User user = UserUtil.createUser();
-        User returnedUser = userController.createUser(user);
+        User returnedUser = userController.createUser(user, null);
         // verify user was passed to UserService
         verify(userService, times(1)).save(user);
         assertEquals("Returned user should come from the service", savedUser, returnedUser);
