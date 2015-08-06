@@ -89,6 +89,6 @@ public class FileService {
 	 * @return
 	 */
 	public String getFileName(Long id, String originalFile) {
-		return String.valueOf(id.longValue()) + FilenameUtils.getExtension(originalFile);		
+		return String.valueOf(id.longValue()) + "." + FilenameUtils.getExtension(originalFile);		
 	}
 }
