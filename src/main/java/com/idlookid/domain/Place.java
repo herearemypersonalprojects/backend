@@ -58,6 +58,15 @@ public class Place {
 	@Column(name = "address", nullable = true)
 	private String address;
 
+	@Column(name = "street_number")
+	private String streetNumber;
+	
+	@Column(name = "route")
+	private String route;
+	
+	@Column(name = "postal_code")
+	private String postalCode;
+	
 	@NotNull
 	@Column(name = "latitude")
 	Double latitude;
@@ -303,4 +312,28 @@ public class Place {
 		this.organisedBy = organisedBy;
 	}
 
+	public String getStreetNumber() {
+		return streetNumber;
+	}
+
+	public void setStreetNumber(String streetNumber) {
+		this.streetNumber = streetNumber;
+	}
+
+	public String getRoute() {
+		return route;
+	}
+
+	public void setRoute(String route) {
+		this.route = route;
+	}
+
+	public String getPostalCode() {
+		return postalCode;
+	}
+
+	public void setPostalCode(String postalCode) {
+		this.postalCode = postalCode;
+	}
+	
 }
