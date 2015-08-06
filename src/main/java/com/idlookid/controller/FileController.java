@@ -37,6 +37,7 @@ public class FileController {
 
     @RequestMapping(value="/upload", method=RequestMethod.POST)
     public @ResponseBody String handleFileUpload(@RequestParam("file") MultipartFile file){
+    	LOGGER.info("A new multimedia file was uploaded: " + file.getOriginalFilename());
         return fileService.saveFile(file);
     }
 }

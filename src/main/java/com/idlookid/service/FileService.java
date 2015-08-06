@@ -7,6 +7,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.multipart.MultipartFile;
@@ -48,20 +49,46 @@ public class FileService {
 	 * @return
 	 */
 	public String saveFile(MultipartFile file, Long id) {
-		if (file != null && !file.isEmpty()) {
+		if (file != null && !file.isEmpty()) {			
             try {
+            	String path = "/home/quocanh/apps/frontend/images/" + String.valueOf(id.longValue()) + "/";
+            	prepareFolder(path);
                 byte[] bytes = file.getBytes();
-                String name = "/home/quocanh/files/" + file.getOriginalFilename();
+                String name = path + getFileName(id, file.getOriginalFilename());
                 BufferedOutputStream stream =
                         new BufferedOutputStream(new FileOutputStream(new File(name)));
                 stream.write(bytes);
                 stream.close();
-                return "You successfully uploaded " + name + "!";
+                return name;
             } catch (Exception e) {
-                return "You failed to upload " + file.getOriginalFilename() + " => " + e.getMessage();
+                return "";
             }
         } else {
-            return "You failed to upload " + file.getOriginalFilename() + " because the file was empty.";
+            return "";
         }		
-	}	
+	}
+	
+	/**
+	 * Create the place's folder if it does not exist
+	 * @param folder
+	 */
+	public void prepareFolder(String folder) {
+		
+		File f = new File(folder);
+		if (f.exists() && f.isDirectory()) {
+		   ;
+		} else {
+			f.mkdir();
+		}
+	}
+	
+	/**
+	 * Naming the saved file which is the place's ID + the file's extension
+	 * @param id
+	 * @param originalFile
+	 * @return
+	 */
+	public String getFileName(Long id, String originalFile) {
+		return String.valueOf(id.longValue()) + FilenameUtils.getExtension(originalFile);		
+	}
 }

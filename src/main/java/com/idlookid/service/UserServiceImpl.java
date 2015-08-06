@@ -14,7 +14,6 @@ import org.springframework.validation.annotation.Validated;
 
 import com.idlookid.domain.User;
 import com.idlookid.repository.UserRepository;
-import com.idlookid.service.exception.UserAlreadyExistsException;
 
 /**
  * @author quocanh
