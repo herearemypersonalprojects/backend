@@ -16,7 +16,7 @@ import com.idlookid.domain.Place;
  *
  */
 public interface MapRepository  extends JpaRepository<Place, Long> {
-	@Query(value="select distinct city from place", nativeQuery = true)
+	@Query(value="select distinct CONCAT(city, ', ', country) as city from place", nativeQuery = true)
 	List<String> findAllCities();
 	
 	@Query(value="select distinct place_type from place", nativeQuery = true)
