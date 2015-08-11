@@ -3,7 +3,6 @@
  */
 package com.idlookid.repository;
 
-import java.util.Collection;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -23,5 +22,14 @@ public interface MapRepository  extends JpaRepository<Place, Long> {
 	@Query(value="select distinct place_type from place", nativeQuery = true)
 	List<String> getListPlaceTypes();
 	
-	Collection<Place> findByCity(@Param("city") String city);
+	List<Place> findByCity(@Param("city") String city);
+	
+	//List<Place> findByTypeIn(List<String> types);
+	
+	@Query(value="select * from place where latitude > :swLat and latitude < :neLat and longitude > :swLng and longitude < :neLng", nativeQuery = true)
+	List<Place> findByCurrentView(
+			@Param("swLat") Double swLat, 
+			@Param("swLng") Double swLng, 
+			@Param("neLat") Double neLat, 
+			@Param("neLng") Double neLng);
 }

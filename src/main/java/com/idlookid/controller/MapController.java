@@ -10,12 +10,13 @@ import java.nio.file.Paths;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.idlookid.domain.DisplayCriterion;
 import com.idlookid.domain.Place;
 import com.idlookid.service.MapService;
 
@@ -32,7 +34,7 @@ import com.idlookid.service.MapService;
  */
 @RestController
 public class MapController {
-	private static final Logger LOGGER = LoggerFactory.getLogger(MapController.class);
+	private static final Logger LOGGER = Logger.getLogger(MapController.class);
     private final MapService mapService;
 
     @Autowired
@@ -44,6 +46,14 @@ public class MapController {
     public List<Place> listPlaces() {
         LOGGER.debug("Received request to list all places");
         return mapService.getList();
+    }
+    
+    @RequestMapping(value = "/getPlaces", 
+    		method = RequestMethod.POST)
+    public List<Place> getListPlaces(@ModelAttribute @Valid final DisplayCriterion criterion) {
+    	LOGGER.info("Received request to list places for conditions: ");
+    	
+    	return mapService.getList(criterion);
     }
     
     /*

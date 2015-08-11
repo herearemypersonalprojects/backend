@@ -3,6 +3,7 @@
  */
 package com.idlookid.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
+import com.idlookid.domain.DisplayCriterion;
 import com.idlookid.domain.Place;
 import com.idlookid.repository.MapRepository;
 
@@ -52,4 +54,22 @@ public class MapServiceImpl implements MapService {
 		return repository.getListPlaceTypes();
 	}	
 	
+	@Override
+	@Transactional(readOnly = true)
+    public List<Place> getList(DisplayCriterion criterion) {
+		if (criterion.getCity() != null) {
+			return repository.findByCity(criterion.getCity());
+		} else
+		if (criterion.getSwLat() != null && 
+			criterion.getSwLng() != null && 
+			criterion.getNeLat() != null && 
+			criterion.getNeLng() != null) {
+			return repository.findByCurrentView(criterion.getSwLat(), 
+					criterion.getSwLng(), 
+					criterion.getNeLat(), 
+					criterion.getNeLng());
+		} else {
+			return new ArrayList<Place>();
+		}
+	}
 }
