@@ -8,19 +8,34 @@ package com.idlookid.staticdata;
  *
  */
 public enum PlaceType {
-	RESTAURANT("Restaurant"),
-	ADMINISTRATION("Administration");
+	RESTAURANT("Restaurant", "Quán ăn"),
+	ADMINISTRATION("Administration", "Cơ quan"),
+	COMPANY("Company", "Công ty"),
+	ASSOCIATION("Association", "Hiệp hội"),
+	HEALTH("Health", "Sức khỏe"),// Pharmacy & Doctor
+	MARKET("Market", "Chợ thực phẩm"),
+	BEAUTY("Beauty", "Chăm sóc sắc đẹp"),
+	TOURISM("Tourism", "Du lịch"),
+	HISTORY("History", "Di tích lịch sử"),
+	EVENT("Event", "Sự kiện"),
+	INDIVIDUAL("individual", "Cá nhân"); 
 	
-	private final String label;
+	private final String en;
+	private final String vn;
 	
-	private PlaceType(String label) {
-		this.label = label;
+	private PlaceType(String en, String vn) {
+		this.en = en;
+		this.vn = vn;
 	}
 
 	/**
 	 * @return the label
 	 */
-	public String getLabel() {
-		return label;
+	public String getEn() {
+		return en;
+	}
+	
+	public String getVn() {
+		return vn;
 	}
 }

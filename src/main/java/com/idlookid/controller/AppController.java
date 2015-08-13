@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.idlookid.domain.Country;
 import com.idlookid.service.AppService;
+import com.idlookid.staticdata.PlaceType;
 
 /**
  * @author quocanh
@@ -39,5 +40,10 @@ public class AppController {
     @RequestMapping(value = "/getListAllCountries", method = RequestMethod.GET)
     public List<Country> getListAllCountries() {
     	return appService.getListALlCountries(); 
+    }
+    
+    @RequestMapping(value = "/getListAllTypes", method = RequestMethod.GET) 
+    public List<PlaceType> getListAllTypes() {
+    	return appService.getListALlTypes();
     }
 }
