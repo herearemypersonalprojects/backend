@@ -4,7 +4,9 @@
 package com.idlookid.service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -64,10 +66,25 @@ public class MapServiceImpl implements MapService {
 			criterion.getSwLng() != null && 
 			criterion.getNeLat() != null && 
 			criterion.getNeLng() != null) {
-			return repository.findByCurrentView(criterion.getSwLat(), 
+			List<Place> lst = repository.findByCurrentView(criterion.getSwLat(), 
 					criterion.getSwLng(), 
 					criterion.getNeLat(), 
 					criterion.getNeLng());
+			// TODO: This can be improved later
+			List<Place> newLst = new ArrayList<Place>();
+			int citiesNumber = 0;
+			Set<String> setCities = new HashSet<String>();
+			for (Place place : lst) {
+				if (!setCities.contains(place.getCity())) {
+					citiesNumber++;
+					setCities.add(place.getCity());
+					newLst.add(place);
+				}
+			}
+			if (citiesNumber > 3) {
+				return newLst;
+			}
+			return lst;
 		} else {
 			return new ArrayList<Place>();
 		}
