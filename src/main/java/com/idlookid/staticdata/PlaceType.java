@@ -17,6 +17,7 @@ public enum PlaceType {
 	BEAUTY("Beauty", "Chăm sóc sắc đẹp"),
 	TOURISM("Tourism", "Du lịch"),
 	HISTORY("History", "Di tích lịch sử"),
+	RELIGION("Religion", "Ton giao"),
 	EVENT("Event", "Sự kiện"),
 	INDIVIDUAL("individual", "Cá nhân"); 
 	

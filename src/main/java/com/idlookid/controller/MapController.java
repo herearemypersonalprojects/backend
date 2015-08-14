@@ -56,6 +56,14 @@ public class MapController {
     }
     
     /*
+     * Get list of available place types    
+     */
+    @RequestMapping(value = "/types", method = RequestMethod.GET)
+    public List<String> listTypes() {   	    	
+		return mapService.getListPlaceTypes();
+    }
+    
+    /*
      * Get list of place types whose places exist on the map
      */
     @RequestMapping(value = "/placeTypes", method = RequestMethod.GET)

@@ -24,7 +24,8 @@ public interface MapRepository  extends JpaRepository<Place, Long> {
 	
 	List<Place> findByCity(@Param("city") String city);
 	
-	//List<Place> findByTypeIn(List<String> types);
+	@Query(value="select * from place where place_type = :type", nativeQuery = true)
+	List<Place> findByType(@Param("type") String type);
 	
 	@Query(value="select * from place where latitude > :swLat and latitude < :neLat and longitude > :swLng and longitude < :neLng", nativeQuery = true)
 	List<Place> findByCurrentView(

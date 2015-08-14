@@ -59,6 +59,9 @@ public class MapServiceImpl implements MapService {
 	@Override
 	@Transactional(readOnly = true)
     public List<Place> getList(DisplayCriterion criterion) {
+		if (criterion.getType() != null) {
+			return repository.findByType(criterion.getType());
+		} else
 		if (criterion.getCity() != null) {
 			return repository.findByCity(criterion.getCity());
 		} else
