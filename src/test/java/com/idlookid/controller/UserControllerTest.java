@@ -40,7 +40,7 @@ public class UserControllerTest {
     public void shouldCreateUser() throws Exception {
         final User savedUser = stubServiceToReturnStoredUser();
         final User user = UserUtil.createUser();
-        User returnedUser = userController.createUser(user, null);
+        User returnedUser = userController.createUser(user);
         // verify user was passed to UserService
         verify(userService, times(1)).save(user);
         assertEquals("Returned user should come from the service", savedUser, returnedUser);

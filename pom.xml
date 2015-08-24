@@ -34,7 +34,13 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-logging</artifactId>
 		</dependency>
-
+		
+		<!-- Facebook -->
+    	<dependency>
+            <groupId>org.springframework.social</groupId>
+            <artifactId>spring-social-facebook</artifactId>
+        </dependency>
+        
 		<!-- Spring Test -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

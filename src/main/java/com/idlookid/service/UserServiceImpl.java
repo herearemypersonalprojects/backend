@@ -14,6 +14,7 @@ import org.springframework.validation.annotation.Validated;
 
 import com.idlookid.domain.User;
 import com.idlookid.repository.UserRepository;
+import com.idlookid.service.exception.UserAlreadyExistsException;
 
 /**
  * @author quocanh
@@ -36,13 +37,19 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public User save(@NotNull @Valid final User user) {
         LOGGER.debug("Creating {}", user);
-        /*
-        User existing = repository.findOne(user.getId());
-        if (existing != null) {
+        
+        List<User> lstUsers = repository.findByEmail(user.getEmail());
+        if (lstUsers != null && !lstUsers.isEmpty()) {
             throw new UserAlreadyExistsException(
-                    String.format("There already exists a user with id=%s", user.getId()));
+                    String.format("There already exists a user with email=%s", user.getEmail()));
         }
-        */
+        
+        lstUsers = repository.findByLogin(user.getLogin());
+        if (lstUsers != null && !lstUsers.isEmpty()) {
+        	 throw new UserAlreadyExistsException(
+                     String.format("There already exists a user with username=%s", user.getLogin()));        	
+        }
+      
         return repository.save(user);
     }
 
