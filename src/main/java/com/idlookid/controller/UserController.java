@@ -1,9 +1,11 @@
 package com.idlookid.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.Valid;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +17,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.idlookid.domain.DisplayCriterion;
+import com.idlookid.domain.Login;
 import com.idlookid.domain.User;
 import com.idlookid.service.FileService;
 import com.idlookid.service.UserService;
 import com.idlookid.service.exception.UserAlreadyExistsException;
+import com.idlookid.staticdata.ErrorMessage;
+import com.idlookid.tools.EmailTools;
 
 /**
  * @author quocanh
@@ -35,10 +41,59 @@ public class UserController {
         this.userService = userService;
     }
 
-    @RequestMapping(value = "/user", method = RequestMethod.POST)
-    public User createUser(@ModelAttribute @Valid final User user) {
+    /**
+     * Add a new user and return information of this user.
+     * Client has to save his user information in memory or in cookie
+     */
+    @RequestMapping(value = "/createUser", method = RequestMethod.POST)
+    public User createUser(@ModelAttribute @Valid User user) {
         LOGGER.debug("Received request to create the {}", user);
         return userService.save(user);
+    }
+    
+    /**
+     * Request to login.
+     * 
+     * @param user
+     * @return user's id if it exists. Otherwise, an alert (email or login not found or password not correct)
+     */
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String login(@ModelAttribute @Valid final Login login) {
+    	if (StringUtils.isBlank(login.getLogin()) || StringUtils.isBlank(login.getPassword())) {
+    		return ErrorMessage.ERROR.getLabel() + ErrorMessage.LOGIN_ERROR.getLabel();
+    	}
+    	
+    	User user = null;
+    	if (EmailTools.isValide(login.getLogin())) {
+    		 user = userService.getUserByEmail(login.getLogin());
+    		if (user == null) {
+    			return ErrorMessage.ERROR.getLabel() + ErrorMessage.LOGIN_ERROR_EMAIL; // go to signup form 
+    		} else {
+    			if (!user.getPassword().equals(login.getPassword())) {
+    				return ErrorMessage.ERROR.getLabel() + ErrorMessage.LOGIN_ERROR_PASSWORD;
+    			}
+    		}
+    	} else {
+    		user = userService.getUserByLogin(login.getLogin());
+    		if (user == null) {
+    			return ErrorMessage.ERROR.getLabel() + ErrorMessage.LOGIN_ERROR_LOGIN; // go to signup form 
+    		} else {
+    			if (!user.getPassword().equals(login.getPassword())) {
+    				return ErrorMessage.ERROR.getLabel() + ErrorMessage.LOGIN_ERROR_PASSWORD;
+    			}
+    		}
+    	}
+    	return user.getId().toString(); 
+    }
+    
+    /**
+     * A client send request every 5s to inform that he is alive
+     * and get other online users in his view only;
+     * 
+     */
+    @RequestMapping(method = RequestMethod.GET, value = "/getListOnlineUsers")
+    public Map<Long, User> getListOnlineUsers(@ModelAttribute @Valid final DisplayCriterion criterion) {
+    	return userService.getListOnlineUsers(criterion);
     }
 
     @RequestMapping(value = "/user", method = RequestMethod.GET)

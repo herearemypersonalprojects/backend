@@ -40,6 +40,9 @@ public class User {
     @Column(name = "last_login_date", nullable = false)
     private Date lastLoginDate;
     
+    @Column(name = "last_active_time") 
+    private long millis;
+    
     @Column(name = "first_connected_ip", nullable = false)
     private String firstConnectedIp;
     
@@ -139,6 +142,20 @@ public class User {
 
 	public void setLogin(String login) {
 		this.login = login;
+	}
+	
+	/**
+	 * @return the millis
+	 */
+	public long getMillis() {
+		return millis;
+	}
+
+	/**
+	 * @param millis the millis to set
+	 */
+	public void setMillis(long millis) {
+		this.millis = millis;
 	}
 
 	public Date getCreatedDate() {

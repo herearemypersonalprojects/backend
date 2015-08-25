@@ -8,6 +8,7 @@ package com.idlookid.domain;
  *
  */
 public class DisplayCriterion {
+	Long currentUser; // user's ID
 	String city;
 	String type;
 	String community;
@@ -15,6 +16,21 @@ public class DisplayCriterion {
 	Double swLng;
 	Double neLat;
 	Double neLng;
+	
+	/** PUBLIC METHODS */
+	
+	/**
+	 * @return the currentUser
+	 */
+	public Long getCurrentUser() {
+		return currentUser;
+	}
+	/**
+	 * @param currentUser the currentUser to set
+	 */
+	public void setCurrentUser(Long currentUser) {
+		this.currentUser = currentUser;
+	}
 	public String getCity() {
 		return city;
 	}
