@@ -42,12 +42,12 @@ public class AppController {
         LOGGER.debug("Check status: OK");
         return "OK";
     }
-    /*
+    
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public User checkUser(HttpServletRequest request) {
     	return null;//userService.checkUser(request.getRemoteAddr()); TODO
     }
-    */
+    
     
     @RequestMapping(value = "/getListAllCountries", method = RequestMethod.GET)
     public List<Country> getListAllCountries() {

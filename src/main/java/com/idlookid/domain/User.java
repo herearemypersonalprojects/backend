@@ -31,7 +31,7 @@ public class User {
     @Column(name = "email", nullable = false)
     private String email;
     
-    @Column(name = "login", nullable = false)
+    @Column(name = "login")
     private String login;
     
     @Column(name = "created_date", nullable = false)
@@ -41,7 +41,7 @@ public class User {
     private Date lastLoginDate;
     
     @Column(name = "last_active_time") 
-    private long millis;
+    private long lastActiveTime; // in milliseconds
     
     @Column(name = "first_connected_ip", nullable = false)
     private String firstConnectedIp;
@@ -97,16 +97,23 @@ public class User {
     @Column(name = "country")
     private String country; // mapping to country's code
     
-	@NotNull
 	@Column(name = "latitude")
 	private Double latitude;
 
-	@NotNull
 	@Column(name = "longitude")
 	private Double longitude;
 	 
 	@Column(name = "gender")
-	private char gender; // m or f
+	private String gender; 
+	
+	@Column(name = "age_range")
+	private int ageRange;
+	
+	@Column(name = "link")
+	private String link;
+	
+	@Column(name = "language")
+	private String language;
     
     User() {
     }
@@ -144,18 +151,13 @@ public class User {
 		this.login = login;
 	}
 	
-	/**
-	 * @return the millis
-	 */
-	public long getMillis() {
-		return millis;
+
+	public long getLastActiveTime() {
+		return lastActiveTime;
 	}
 
-	/**
-	 * @param millis the millis to set
-	 */
-	public void setMillis(long millis) {
-		this.millis = millis;
+	public void setLastActiveTime(long lastActiveTime) {
+		this.lastActiveTime = lastActiveTime;
 	}
 
 	public Date getCreatedDate() {
@@ -334,13 +336,35 @@ public class User {
 		this.longitude = longitude;
 	}
 
-	public char getGender() {
+	public String getGender() {
 		return gender;
 	}
 
-	public void setGender(char gender) {
+	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	
-	
+
+	public int getAgeRange() {
+		return ageRange;
+	}
+
+	public void setAgeRange(int ageRange) {
+		this.ageRange = ageRange;
+	}
+
+	public String getLink() {
+		return link;
+	}
+
+	public void setLink(String link) {
+		this.link = link;
+	}
+
+	public String getLanguage() {
+		return language;
+	}
+
+	public void setLanguage(String language) {
+		this.language = language;
+	}
 }

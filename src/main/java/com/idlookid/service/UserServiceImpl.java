@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Map<Long, User> getListOnlineUsers(DisplayCriterion criterion) {
     	// current user is active
-    	listOnlineUsers.get(criterion.getCurrentUser()).setMillis(System.currentTimeMillis());
+    	listOnlineUsers.get(criterion.getCurrentUser()).setLastActiveTime(System.currentTimeMillis());
     	
     	// TODO check condition criterion 
     	return listOnlineUsers;
@@ -81,12 +81,6 @@ public class UserServiceImpl implements UserService {
         if (lstUsers != null && !lstUsers.isEmpty()) {
             throw new UserAlreadyExistsException(
                     String.format("There already exists a user with email=%s", user.getEmail()));
-        }
-        
-        lstUsers = repository.findByLogin(user.getLogin());
-        if (lstUsers != null && !lstUsers.isEmpty()) {
-        	 throw new UserAlreadyExistsException(
-                     String.format("There already exists a user with username=%s", user.getLogin()));        	
         }
       
         return repository.save(user);

@@ -10,7 +10,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 /**
  * @author quocanh
@@ -24,47 +26,44 @@ public class Message {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@Column(name = "from") // user's id
-	private Long from;
+	@Column(name = "from_user") // user's id
+	private Long fromUser;
 	
-	@Column(name = "to") // user's id
-	private Long to;
+	@Column(name = "to_user") // user's id
+	private Long toUser;
 	
 	@Column(name = "content")
 	private String content;
-	
-	@Column(name = "created_date")
-	private Date createdDate;
 
+	@Column(name = "created_date")
+	Date createdDate;
 	/** PUBLIC METHODS */
 	
-	/**
-	 * @return the from
-	 */
-	public Long getFrom() {
-		return from;
+	@PrePersist
+	protected void onCreate() {
+		createdDate = new Date();
+	}
+	
+
+	public Long getFromUser() {
+		return fromUser;
 	}
 
-	/**
-	 * @param from the from to set
-	 */
-	public void setFrom(Long from) {
-		this.from = from;
+
+	public void setFromUser(Long fromUser) {
+		this.fromUser = fromUser;
 	}
 
-	/**
-	 * @return the to
-	 */
-	public Long getTo() {
-		return to;
+
+	public Long getToUser() {
+		return toUser;
 	}
 
-	/**
-	 * @param to the to to set
-	 */
-	public void setTo(Long to) {
-		this.to = to;
+
+	public void setToUser(Long toUser) {
+		this.toUser = toUser;
 	}
+
 
 	/**
 	 * @return the content

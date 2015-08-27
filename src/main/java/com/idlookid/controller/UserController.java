@@ -1,8 +1,10 @@
 package com.idlookid.controller;
 
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.apache.commons.lang.StringUtils;
@@ -46,8 +48,17 @@ public class UserController {
      * Client has to save his user information in memory or in cookie
      */
     @RequestMapping(value = "/createUser", method = RequestMethod.POST)
-    public User createUser(@ModelAttribute @Valid User user) {
+    public User createUser(@ModelAttribute User user, HttpServletRequest request) {
         LOGGER.debug("Received request to create the {}", user);
+        user.setCreatedDate(Calendar.getInstance().getTime());
+        user.setLastLoginDate(Calendar.getInstance().getTime());
+        user.setLastActiveTime(System.currentTimeMillis());
+        user.setFirstConnectedIp(request.getRemoteAddr());
+        user.setLastConnectedIp(request.getRemoteAddr());
+        return createUser(user);
+    }
+    
+    public User createUser(@ModelAttribute User user) {
         return userService.save(user);
     }
     

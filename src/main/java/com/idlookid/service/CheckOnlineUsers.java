@@ -20,10 +20,9 @@ public class CheckOnlineUsers extends TimerTask{
 	 */
 	@Override
 	public void run() {
-		
 	    for(Iterator<Map.Entry<Long, User>> it = UserServiceImpl.listOnlineUsers.entrySet().iterator(); it.hasNext(); ) {
 	        Map.Entry<Long, User> entry = it.next();
-	        if(System.currentTimeMillis() - entry.getValue().getMillis() > 60000) {
+	        if(System.currentTimeMillis() - entry.getValue().getLastActiveTime() > 60000) {
 	          it.remove();
 	        }
 	      }
