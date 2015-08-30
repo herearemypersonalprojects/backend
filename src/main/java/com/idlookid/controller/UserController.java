@@ -68,33 +68,39 @@ public class UserController {
      * @param user
      * @return user's id if it exists. Otherwise, an alert (email or login not found or password not correct)
      */
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(@ModelAttribute @Valid final Login login) {
+    @RequestMapping(value = "signin", method = RequestMethod.GET)
+    public Login signin(@ModelAttribute Login login, HttpServletRequest request) {
+    	Login result = new Login();
     	if (StringUtils.isBlank(login.getLogin()) || StringUtils.isBlank(login.getPassword())) {
-    		return ErrorMessage.ERROR.getLabel() + ErrorMessage.LOGIN_ERROR.getLabel();
+    		result.setError(ErrorMessage.LOGIN_ERROR_EMPTY);
+    		return result;// ErrorMessage.ERROR.getLabel() + ErrorMessage.LOGIN_ERROR.getLabel();
     	}
-    	
     	User user = null;
     	if (EmailTools.isValide(login.getLogin())) {
     		 user = userService.getUserByEmail(login.getLogin());
     		if (user == null) {
-    			return ErrorMessage.ERROR.getLabel() + ErrorMessage.LOGIN_ERROR_EMAIL; // go to signup form 
+    			result.setError(ErrorMessage.LOGIN_ERROR_EMAIL); // go to signup form 
+    			return result;
     		} else {
     			if (!user.getPassword().equals(login.getPassword())) {
-    				return ErrorMessage.ERROR.getLabel() + ErrorMessage.LOGIN_ERROR_PASSWORD;
+    				result.setError(ErrorMessage.LOGIN_ERROR_PASSWORD);
+    				return result;
     			}
     		}
     	} else {
     		user = userService.getUserByLogin(login.getLogin());
     		if (user == null) {
-    			return ErrorMessage.ERROR.getLabel() + ErrorMessage.LOGIN_ERROR_LOGIN; // go to signup form 
+    			result.setError(ErrorMessage.LOGIN_ERROR_LOGIN); // go to signup form 
+    			return result;
     		} else {
     			if (!user.getPassword().equals(login.getPassword())) {
-    				return ErrorMessage.ERROR.getLabel() + ErrorMessage.LOGIN_ERROR_PASSWORD;
+    				result.setError(ErrorMessage.LOGIN_ERROR_PASSWORD);
+    				return result;
     			}
     		}
     	}
-    	return "ID:".concat(user.getId().toString()); 
+    	result.setId(user.getId());
+    	return result;
     }
     
     /**

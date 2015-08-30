@@ -55,7 +55,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserByEmail(String email) {
     	List<User> user = repository.findByEmail(email);
-    	if (user != null) {
+    	if (user != null && !user.isEmpty()) {
     		listOnlineUsers.put(user.get(0).getId(), user.get(0));
     		return user.get(0);
     	}

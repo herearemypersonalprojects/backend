@@ -5,6 +5,7 @@ package com.idlookid.domain;
 
 import java.util.List;
 
+import com.idlookid.staticdata.ErrorMessage;
 import com.idlookid.tools.EmailTools;
 
 /**
@@ -16,7 +17,27 @@ public class Login {
 	private String password;
 	private String pageRedirect;
 	private List<String> params;
+	private ErrorMessage error;
+	private Long id;
 	
+	/** PUBLIC METHODS */
+	
+	public void setError(ErrorMessage error) {
+		this.error = error;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public ErrorMessage getError() {
+		return error;
+	}
+
 	/**
 	 * @return the login
 	 */
