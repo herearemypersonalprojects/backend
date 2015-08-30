@@ -94,7 +94,7 @@ public class UserController {
     			}
     		}
     	}
-    	return user.getId().toString(); 
+    	return "ID:".concat(user.getId().toString()); 
     }
     
     /**
